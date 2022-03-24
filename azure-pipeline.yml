@@ -1,6 +1,6 @@
 variables:
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
-    release: false
+    release: true
   ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/') }}:
     release: false
   ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/bugfix/') }}:
