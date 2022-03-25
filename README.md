@@ -1,4 +1,4 @@
-# Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/elglogins/Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem/pulls)
+# Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/elglogins/Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem/pulls) [![NuGet version](https://img.shields.io/nuget/v/Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem)](https://www.nuget.org/packages/Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem/)
 
 ## What is this package about?
 
@@ -12,8 +12,8 @@ Ideas for usage:
 {
 	"sourceId": "gid://Source/531fd49c-4191-4ff0-a3c2-391189f9f1ae",
 	"id": "gid://Source/531fd49c-4191-4ff0-a3c2-391189f9f1ae/Entity/dictionaries-root-en-US",
-	"type": "umbDictionaryRoot",
-	"originId": "dictionaries-root-en-US",
+	"type": "umbDictionaryRoot", // always 'umbDictionaryRoot'
+	"originId": "dictionaries-root-en-US", // dictionaries-root-{p.culture}
 	"originParentId": null,
 	"url": null,
 	"properties": {
@@ -38,6 +38,14 @@ Ideas for usage:
 	}
 }
 ```
+
+## Installation
+```
+dotnet add package Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem
+```
+
+Check other [installation options](https://www.nuget.org/packages/Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem/).
+
 
 ## Contributing
 
