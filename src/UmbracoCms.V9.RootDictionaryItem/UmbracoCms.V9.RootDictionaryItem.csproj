@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<PackageId>Enterspeed.Contrib.Source.UmbracoCms.V9.RootDictionaryItem</PackageId>
 
-		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+		<TargetFramework>net5.0</TargetFramework>
 		<PackageVersion>0.0.0</PackageVersion>
 		<Authors>Elgars Logins</Authors>
 
@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Enterspeed.Source.UmbracoCms.V9" Version="[0.11,1.0)" />
+		<PackageReference Include="Enterspeed.Source.UmbracoCms.V9" Version="0.11" />
 		<PackageReference Include="Umbraco.Cms.Core" Version="[9.0,10.0)" />
 	</ItemGroup>
 
