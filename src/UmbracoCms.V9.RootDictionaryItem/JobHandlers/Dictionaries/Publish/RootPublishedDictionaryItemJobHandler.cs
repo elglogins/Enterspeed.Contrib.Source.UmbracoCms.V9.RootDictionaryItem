@@ -1,31 +1,38 @@
-﻿using Enterspeed.Source.Sdk.Api.Models;
+﻿using System;
+using Enterspeed.Source.Sdk.Api.Models;
 using Enterspeed.Source.Sdk.Api.Services;
 using Enterspeed.Source.UmbracoCms.V9.Data.Models;
 using Enterspeed.Source.UmbracoCms.V9.Exceptions;
 using Enterspeed.Source.UmbracoCms.V9.Handlers;
+using Enterspeed.Source.UmbracoCms.V9.Models;
+using Enterspeed.Source.UmbracoCms.V9.Providers;
 using Enterspeed.Source.UmbracoCms.V9.Services;
-using System;
 using UmbracoCms.V9.RootDictionaryItem.Models;
 
-namespace UmbracoCms.V9.RootDictionaryItem.JobHandlers
+namespace UmbracoCms.V9.RootDictionaryItem.JobHandlers.Dictionaries.Publish
 {
     public class RootPublishedDictionaryItemJobHandler : IEnterspeedJobHandler
     {
         private readonly IEnterspeedIngestService _enterspeedIngestService;
         private readonly IEntityIdentityService _entityIdentityService;
+        private readonly IEnterspeedConnectionProvider _enterspeedConnectionProvider;
 
         public RootPublishedDictionaryItemJobHandler(
             IEnterspeedIngestService enterspeedIngestService,
-            IEntityIdentityService entityIdentityService)
+            IEntityIdentityService entityIdentityService,
+            IEnterspeedConnectionProvider enterspeedConnectionProvider)
         {
             _enterspeedIngestService = enterspeedIngestService;
             _entityIdentityService = entityIdentityService;
+            _enterspeedConnectionProvider = enterspeedConnectionProvider;
         }
 
         public bool CanHandle(EnterspeedJob job)
         {
             return DictionaryRootConstants.EntityId.Equals(job.EntityId, StringComparison.InvariantCultureIgnoreCase)
+                &&  _enterspeedConnectionProvider.GetConnection(ConnectionType.Publish) != null
                 && job.EntityType == EnterspeedJobEntityType.Dictionary
+                && job.ContentState == EnterspeedContentState.Publish
                 && job.JobType == EnterspeedJobType.Publish;
         }
 
@@ -51,7 +58,7 @@ namespace UmbracoCms.V9.RootDictionaryItem.JobHandlers
 
         internal void Ingest(IEnterspeedEntity umbracoData, EnterspeedJob job)
         {
-            var ingestResponse = _enterspeedIngestService.Save(umbracoData);
+            var ingestResponse = _enterspeedIngestService.Save(umbracoData, _enterspeedConnectionProvider.GetConnection(ConnectionType.Publish));
             if (!ingestResponse.Success)
             {
                 var message = ingestResponse.Exception != null

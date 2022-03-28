@@ -3,6 +3,8 @@ using Enterspeed.Source.UmbracoCms.V9.DataPropertyValueConverters;
 using Enterspeed.Source.UmbracoCms.V9.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
+using Enterspeed.Source.UmbracoCms.V9.Handlers.Dictionaries;
+using Enterspeed.Source.UmbracoCms.V9.Handlers.PreviewDictionaries;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
 using UmbracoCms.V9.RootDictionaryItem.JobHandlers;
@@ -23,12 +25,17 @@ namespace UmbracoCms.V9.RootDictionaryItem.Composers
 
             // Remove default published dictionary items job handler
             builder.EnterspeedJobHandlers()
-                .Remove<EnterspeedPublishedDictionaryItemJobHandler>();
+                .Remove<EnterspeedDictionaryItemPublishJobHandler>()
+                .Remove<EnterspeedPreviewDictionaryItemPublishJobHandler>();
 
             // Register own dictionary job handlers
             builder.EnterspeedJobHandlers()
-                .Append<NonRootPublishedDictionaryItemJobHandler>()
-                .Append<RootPublishedDictionaryItemJobHandler>();
+                // Preview
+                .Append<JobHandlers.Dictionaries.Preview.NonRootPublishedDictionaryItemJobHandler>()
+                .Append<JobHandlers.Dictionaries.Preview.RootPublishedDictionaryItemJobHandler>()
+                // Publish
+                .Append<JobHandlers.Dictionaries.Publish.NonRootPublishedDictionaryItemJobHandler>()
+                .Append<JobHandlers.Dictionaries.Publish.RootPublishedDictionaryItemJobHandler>();
         }
     }
 }
